@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\Contact;
+use App\Models\Galeria;
 use Database\Factories\ContactFactory;
 
 class DatabaseSeeder extends Seeder
@@ -15,6 +15,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        Contact::factory(100)->create();
+        Galeria::factory(10)->create();
     }
 }
