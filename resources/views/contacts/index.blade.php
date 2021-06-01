@@ -32,7 +32,11 @@
                  <form class="" action="{{ route('contacts.destroy', $contact)}}" method="post">
                    @csrf
                   @method('DELETE')
-                   <button type="submit" class="btn btn-light"><i class="far fa-trash-alt"></i></button>
+                   <button type="submit" class="btn btn-light">
+
+                     <i class="far fa-trash-alt"></i>
+                   
+                   </button>
                  </form>
                </div>
              </td>

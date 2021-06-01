@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Galeria;
 use Illuminate\Http\Request;
+use Intervention\Image\Facades\Image;
 
 class GaleriaController extends Controller
 {
@@ -14,7 +15,8 @@ class GaleriaController extends Controller
      */
     public function index()
     {
-        //
+       $galerias = Galeria::all();
+        return view('galerias.index',compact('galerias'));
     }
 
     /**
@@ -24,7 +26,7 @@ class GaleriaController extends Controller
      */
     public function create()
     {
-        //
+        return view('galerias.create');
     }
 
     /**
@@ -35,7 +37,23 @@ class GaleriaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $data = request()->validate([
+      'title' => 'required',
+      'image' => ['required', 'image'],
+      'description'=>'required'
+       ]);
+       $imagePath = request('image')->store('uploads', 'public');
+       $image = Image::make(public_path("storage/{$imagePath}"))->fit(600, 360);
+       $image->save();
+       Galeria::create([
+         'title' => $data['title'],
+         'image' => $imagePath,
+         'description'=>$data['description']
+     ]);
+
+     return redirect()->route('galerias.index')->with('success', 'Your image has been successfully Uploaded');;
+
+
     }
 
     /**
@@ -46,7 +64,7 @@ class GaleriaController extends Controller
      */
     public function show(Galeria $galeria)
     {
-        //
+        return view('galerias.show',compact('galeria'));
     }
 
     /**
@@ -57,7 +75,7 @@ class GaleriaController extends Controller
      */
     public function edit(Galeria $galeria)
     {
-        //
+        return view('galerias.edit');
     }
 
     /**

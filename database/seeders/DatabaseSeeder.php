@@ -4,7 +4,8 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\Galeria;
-use Database\Factories\ContactFactory;
+use Database\Factories\GaleriaFactory;
+use Illuminate\Support\Facades\Storage;
 
 class DatabaseSeeder extends Seeder
 {
@@ -15,6 +16,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        Galeria::factory(10)->create();
+      
     }
 }
